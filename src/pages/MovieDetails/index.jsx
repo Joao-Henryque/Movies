@@ -15,7 +15,6 @@ import PageWrapper from '../../components/PageWrapper';
 import MovieDetailsLoader from '../../components/Skeleton/MovieDetailsLoader';
 import saveMovieAsFavorite from '../../httpClient/saveMovieAsFavorite';
 
-import { APIKey } from '../../config/key';
 import { apiMovieDb } from '../../services/axios';
 import { isMovieAlreadyFavorite } from '../../services/isMovieAlreadyFavorite';
 import { imagePath } from '../../utils/imagePath';
@@ -32,7 +31,9 @@ function MovieDetails() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiMovieDb.get(`movie/${params.id}${APIKey}`);
+        const { data } = await apiMovieDb.get(
+          `movie/${params.id}${process.env.API_KEY}`
+        );
         const movie = await data;
 
         setMovieDetails(movie);

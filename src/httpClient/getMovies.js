@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import toast from 'react-hot-toast';
 
-import { APIKey } from '../config/key';
 import { apiMovieDb } from '../services/axios';
 
 function GetMovies(apiPath) {
@@ -12,7 +11,9 @@ function GetMovies(apiPath) {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await apiMovieDb.get(`${apiPath}${APIKey}`);
+        const { data } = await apiMovieDb.get(
+          `${apiPath}${process.env.API_KEY}`
+        );
         const movies = await data.results;
 
         setMovieList(movies);
